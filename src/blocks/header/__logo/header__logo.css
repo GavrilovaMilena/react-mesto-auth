@@ -1,0 +1,18 @@
+@media (min-width: 320px) {
+    .header__logo {
+        margin-left: 27px;
+        max-width: 103.74px;
+        margin-bottom: 31.6px;
+        background-image: url("../../../images/Vector.svg");
+        background-repeat: no-repeat;
+    }
+}
+
+@media (min-width: 1280px) {
+    .header__logo {
+        max-width: 142px;
+        margin-bottom: 41px;
+        margin-left: 0;
+        min-height: 33px;
+    }
+}
