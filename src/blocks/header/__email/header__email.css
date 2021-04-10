@@ -4,9 +4,10 @@
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
+  padding-right: 20px;
 }
 
-@media (min-width: 320px) {
+@media (max-width: 320px) {
   .header__email {
     font-size: 14px;
   }

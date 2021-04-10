@@ -5,14 +5,14 @@
     box-sizing: border-box;
 }
 
-@media (min-width: 320px) {
+@media (max-width: 320px) {
     .popup__window {
         min-height: 282px;
         min-width: 279px;
     }
 }
 
-@media (min-width: 1280px) {
+@media (max-width: 1280px) {
     .popup__window {
         max-width: 430px;
         width: 100%;

@@ -272,7 +272,7 @@ function App() {
         <InfoTooltip
           isOpen={isTooltipOpened}
           onClose={closeAllPopups}
-          name="registerEdit"
+          name="reg"
           isRegSuccess={isAuth}
           regSuccess="Вы успешно зарегестрировались!"
           regFailed="Что-то пошло не так! Попробуйте ещё раз."
