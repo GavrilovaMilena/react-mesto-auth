@@ -29,17 +29,20 @@ function App() {
 
   const handleLogin = (data) => {
     const { email, password } = data;
-    return login(email, password)
+    setUserLoginData(email);
+    login(email, password)
       .then((res) => {
-        if (res) {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
           setLoggedIn(true);
           setIsAuth(true);
           history.push("/");
-          localStorage.setItem("jwt", res.token);
         }
       })
       .catch((err) => {
+        setIsAuth(false);
         setIsTooltipOpened(true);
+        openRegModal();
         console.log(`Произошла ошибка: ${err}`);
       });
   };
@@ -50,10 +53,13 @@ function App() {
       .then((res) => {
         if (res.data) {
           setIsAuth(true);
+          openRegModal();
         }
       })
       .catch((err) => {
         setIsTooltipOpened(true);
+        setIsAuth(false);
+        openRegModal();
         console.log(`Произошла ошибка: ${err}`);
       });
   };
@@ -94,11 +100,17 @@ function App() {
           }
         })
         .catch((err) => {
-          setIsTooltipOpened(true);
+          openRegModal();
           console.log(`Произошла ошибка: ${err}`);
         });
     }
-  }, [history]);
+  }, [history, loggedIn]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      history.push('/');
+    }
+  }, [history, loggedIn]);
 
   React.useEffect(() => {
     api
@@ -220,6 +232,10 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  function openRegModal() {
+    setIsTooltipOpened(true);
   }
 
   return (
