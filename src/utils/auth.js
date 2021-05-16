@@ -7,6 +7,7 @@ export const register = (email, password) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://mlngvr.nomoredomains.club",
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
