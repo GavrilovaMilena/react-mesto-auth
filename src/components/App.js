@@ -7,26 +7,23 @@ import { CurrentUserContext } from "../../src/contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import {
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
-import Login from './Login';
-import Register from './Register';
-import InfoTooltip from './InfoTooltip';
+import Login from "./Login";
+import Register from "./Register";
+import InfoTooltip from "./InfoTooltip";
 import api from "../utils/api";
 import "../index.css";
-import { register, login, getData } from '../utils/auth';
-
+import { register, login, getData } from "../utils/auth";
 
 function App() {
+  //Логаут пользователя из системы
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     setIsAuth(false);
   };
 
+  //Авторизация пользователя
   const handleLogin = (data) => {
     const { email, password } = data;
     setUserLoginData(email);
@@ -47,6 +44,7 @@ function App() {
       });
   };
 
+  //Регистрация нового пользователя
   const handleRegister = (data) => {
     const { email, password } = data;
     return register(email, password)
@@ -66,11 +64,19 @@ function App() {
 
   const history = useHistory();
 
-  const [isTooltipOpened, setIsTooltipOpened] =  React.useState(false);
-  const [userLoginData, setUserLoginData] = React.useState('');
+  //Стейт для отображения InfoTooltip
+  const [isTooltipOpened, setIsTooltipOpened] = React.useState(false);
+
+  //Стейт для данных залогиненного пользователя
+  const [userLoginData, setUserLoginData] = React.useState("");
+
+  //Стейт для авторизации
   const [isAuth, setIsAuth] = React.useState(false);
+
+  //Стейт для авторизации
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  //Стейты для отображения поп-апов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
     false
   );
@@ -78,16 +84,21 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(
     false
   );
+
+  //Стейт для выбранной карточки
   const [selectedCard, setSelectedCard] = React.useState(false);
 
+  //Стейт для данных пользователя
   const [currentUser, setCurrentUser] = React.useState({
     name: "",
     about: "",
     avatar: "",
   });
 
+  //Стейт для карточек
   const [cards, setCards] = React.useState([]);
 
+  //Обновление стейтов пользователя на основе токена
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
@@ -108,10 +119,11 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      history.push('/');
+      history.push("/");
     }
   }, [history, loggedIn]);
 
+  //Получение данных о пользователе и карточки
   React.useEffect(() => {
     api
       .getInitialCards()
@@ -136,6 +148,7 @@ function App() {
       });
   }, []);
 
+  //Функция лайка карточки
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
@@ -151,6 +164,7 @@ function App() {
       });
   }
 
+  //Функция удаления карточки
   function handleCardDelete(card) {
     api
       .deleteCard(card._id)
@@ -163,23 +177,27 @@ function App() {
       });
   }
 
+  //Обработчик клика по изображению карточки
   function handleCardClick(card) {
     setSelectedCard(card);
   }
+  //Обработчик кнопки редактирования аватарки
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
   function handleEditTooltipClick() {
     setIsTooltipOpened(true);
   }
-
+  //Обработчик кнопки редактирования информации профиля
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
+  //Обработчик кнопки добавления новой карточки
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
 
+  //Обработчик закрытия любых поп-апов
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -188,6 +206,7 @@ function App() {
     setIsTooltipOpened(false);
   }
 
+  //Обработчик для отправки данных пользователя на сервер
   function handleUpdateUser({ name, about }) {
     api
       .setUserInfo({ name, about })
@@ -205,6 +224,7 @@ function App() {
       });
   }
 
+  //Обработчик для обновления аватарки пользователя
   function handleUpdateAvatar({ avatar }) {
     api
       .updateAvatarImage({ avatar })
@@ -222,6 +242,7 @@ function App() {
       });
   }
 
+  //Функция добавления карточки
   function handleAddPlaceSubmit(name, link) {
     api
       .addCard(name, link)
@@ -234,6 +255,7 @@ function App() {
       });
   }
 
+  //Показ/скрытие попапа об успешной/неудачной регистрации
   function openRegModal() {
     setIsTooltipOpened(true);
   }

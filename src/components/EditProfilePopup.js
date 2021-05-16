@@ -3,23 +3,30 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
+  //Подписка на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
 
+  //Cтейты имени и описания профиля
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  //После загрузки данных пользователя из API
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [currentUser]);
 
+  //Функция для изменения имени
   function handleChangeName(e) {
     setName(e.target.value);
   }
 
+  //Функция для изменения описания профиля
   function handleChangeDescription(e) {
     setDescription(e.target.value);
   }
 
+  //Обработчик сабмита формы
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -31,7 +38,7 @@ function EditProfilePopup(props) {
 
   return (
     <PopupWithForm
-      name="profileEdit"
+      name="profileprofileEdit"
       title="Редактировать профиль"
       buttonName="Сохранить"
       isOpen={props.isOpen}

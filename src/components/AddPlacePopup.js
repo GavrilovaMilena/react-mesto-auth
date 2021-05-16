@@ -21,7 +21,7 @@ function AddPlacePopup(props) {
 
   return (
     <PopupWithForm
-      name="cardEdit"
+      name="card"
       title="Новое место"
       buttonName="Создать"
       isOpen={props.isOpen}

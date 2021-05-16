@@ -2,8 +2,10 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup(props) {
+  // Реф для прямого доступа к DOM-элементу
   const inputRef = React.useRef();
 
+  // Обработчик сабмита формы
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -14,7 +16,7 @@ function EditAvatarPopup(props) {
 
   return (
     <PopupWithForm
-      name="avatarEdit"
+      name="avatar"
       title="Обновить аватар"
       buttonName="Сохранить"
       isOpen={props.isOpen}

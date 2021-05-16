@@ -4,6 +4,7 @@ import { CurrentUserContext } from "../../src/contexts/CurrentUserContext.js";
 import Header from "./Header";
 
 function Main(props) {
+    //Подписка на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
