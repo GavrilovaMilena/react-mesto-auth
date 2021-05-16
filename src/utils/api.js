@@ -140,7 +140,7 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://mlngvr.nomoredomains.club",
+  url: "http://mlngvr.nomoredomains.club",
   headers: {
     authorization: "525a9253-bff1-4ef9-85d2-df3d4a503fec",
     "Content-Type": "application/json"
