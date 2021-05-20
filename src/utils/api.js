@@ -1,4 +1,4 @@
-const BASE_URL = 'https://mlngvr.nomoredomains.club';
+const BASE_URL = 'https://api.mlngvr.nomoredomains.club';
 
 class Api {
   constructor(options) {
@@ -145,7 +145,7 @@ class Api {
 const api = new Api({
   url: BASE_URL,
   headers: {
-    Accept: "application/json",
+    "Accept": "application/json",
     "Content-Type": "application/json"
   }
 });

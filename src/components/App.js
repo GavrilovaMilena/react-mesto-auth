@@ -102,7 +102,6 @@ function App() {
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-
       getData(jwt)
         .then((res) => {
           if (res) {

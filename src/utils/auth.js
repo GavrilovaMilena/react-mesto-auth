@@ -1,5 +1,5 @@
 //Базовый URL
-export const BASE_URL = 'https://mlngvr.nomoredomains.club';
+export const BASE_URL = 'https://api.mlngvr.nomoredomains.club';
 
 export const register = (email, password) => {
   return fetch (`${BASE_URL}/signup`, {
@@ -21,8 +21,8 @@ export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
