@@ -1,3 +1,5 @@
+const BASE_URL = 'https://mlngvr.nomoredomains.club';
+
 class Api {
   constructor(options) {
     this._url = options.url;
@@ -65,6 +67,7 @@ class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
@@ -140,8 +143,9 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://mlngvr.nomoredomains.club",
+  url: BASE_URL,
   headers: {
+    Accept: "application/json",
     "Content-Type": "application/json"
   }
 });

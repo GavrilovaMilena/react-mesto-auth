@@ -2,13 +2,13 @@
 export const BASE_URL = 'https://mlngvr.nomoredomains.club';
 
 export const register = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
+  return fetch (`${BASE_URL}/signup`, {
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      'Content-Type':'application/json',
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({email, password})
   }).then((res) => {
     if (res.ok) {
       return res.json();

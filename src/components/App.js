@@ -49,7 +49,7 @@ function App() {
     const { email, password } = data;
     return register(email, password)
       .then((res) => {
-        if (res.data) {
+        if (res) {
           setIsAuth(true);
           openRegModal();
         }
@@ -107,7 +107,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            setUserLoginData(res.data.email);
+            setUserLoginData(res.email);
           }
         })
         .catch((err) => {
@@ -123,30 +123,6 @@ function App() {
     }
   }, [history, loggedIn]);
 
-  //Получение данных о пользователе и карточки
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser({
-          name: data.name,
-          about: data.about,
-          avatar: data.avatar,
-          _id: data._id,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   //Функция лайка карточки
   function handleCardLike(card) {
@@ -281,10 +257,10 @@ function App() {
               userLoginData={userLoginData}
               logout={handleLogout}
             />
-            <Route path="/sign-in">
+            <Route path="/signin">
               <Login handleLogin={handleLogin} />
             </Route>
-            <Route path="/sign-up">
+            <Route path="/signup">
               <Register handleRegister={handleRegister} />
             </Route>
           </Switch>

@@ -12,7 +12,7 @@ function Main(props) {
       <Header
         loggedIn={props.loggedIn}
         login={props.userLoginData}
-        link="/sign-in"
+        link="/signin"
         onClick={props.logout}
         headerText={"Выйти"}
       />
