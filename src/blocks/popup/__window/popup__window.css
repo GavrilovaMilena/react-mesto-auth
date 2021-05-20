@@ -3,6 +3,7 @@
     background-color: white;
     border-radius: 10px;
     box-sizing: border-box;
+    padding: 8px;
 }
 
 @media (max-width: 320px) {

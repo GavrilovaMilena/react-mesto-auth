@@ -35,14 +35,13 @@ class Api {
     });
   }
 
-  setUserInfo({ name, about, avatar }) {
+  setUserInfo({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: `${name}`,
-        about: `${about}`,
-        avatar: `${avatar}`,
+        about: `${about}`
       }),
     }).then((res) => {
       if (res.ok) {

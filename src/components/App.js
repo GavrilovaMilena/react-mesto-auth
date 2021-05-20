@@ -101,12 +101,25 @@ function App() {
   //Обновление стейтов пользователя на основе токена
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      getData(jwt)
+      api.setToken(localStorage.getItem("jwt"));
+      api.getUserInfo()
         .then((res) => {
           if (res) {
             setLoggedIn(true);
             setUserLoginData(res.email);
+            setCurrentUser({
+              name: res.name,
+              about: res.about,
+              avatar: res.avatar,
+              _id: res._id,
+            });
+
+            api
+            .getInitialCards()
+            .then((data) => {
+              data.reverse();
+              setCards(data);
+            })
           }
         })
         .catch((err) => {
@@ -122,10 +135,9 @@ function App() {
     }
   }, [history, loggedIn]);
 
-
   //Функция лайка карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
